@@ -53,6 +53,13 @@ Format du commentaire frije :
 Reprendre les tags **directement depuis la source** (frije, etc.), séparés par des virgules.
 
 **Règles :**
+- Ne **jamais créer un tag qui n'existe pas déjà dans le dépôt** : lister les tags existants avant d'écrire le bloc YAML
+
+```bash
+grep -h "^tags:" recipes/*.cook | sed 's/^tags: *//' | tr ',' '\n' | sed 's/^ *//;s/ *$//' | sort -u
+```
+
+- Un tag de la source absent du dépôt : le remplacer par le tag existant le plus proche, sinon l'abandonner
 - Ne **jamais inventer** de tags
 - Ne pas ajouter "végétarien" ou autre tag si non présent sur la source
 - Si un tag semble incorrect sur frije, ne pas le reprendre
